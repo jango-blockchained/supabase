@@ -1,14 +1,14 @@
-import { Button, IconChevronRight, IconExternalLink } from '@supabase/ui'
 import matter from 'gray-matter'
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 
 import { MDXRemote } from 'next-mdx-remote'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { IconChevronLeft, IconChevronsLeft } from '~/../../packages/ui'
+import { Button } from 'ui'
 import CTABanner from '~/components/CTABanner'
 import DefaultLayout from '~/components/Layouts/Default'
+import { SITE_ORIGIN } from '~/lib/constants'
 import mdxComponents from '~/lib/mdx/mdxComponents'
 import { mdxSerialize } from '~/lib/mdx/mdxSerialize'
 import { getAllPostSlugs, getPostdata, getSortedPosts } from '~/lib/posts'
@@ -30,9 +30,14 @@ export async function getStaticProps({ params }: any) {
   const { data, content } = matter(postContent)
   const mdxSource: any = await mdxSerialize(content)
 
-  const relatedPosts = getSortedPosts('_customers', 5, mdxSource.scope.tags)
+  const relatedPosts = getSortedPosts({
+    directory: '_customers',
+    limit: 5,
+    tags: mdxSource.scope.tags,
+    currentPostSlug: filePath,
+  })
 
-  const allPosts = getSortedPosts('_customers')
+  const allPosts = getSortedPosts({ directory: '_customers' })
   const currentIndex = allPosts
     .map(function (e) {
       return e.slug
@@ -58,14 +63,30 @@ export async function getStaticProps({ params }: any) {
 }
 
 function CaseStudyPage(props: any) {
-  const content = props.blog.content
-  const { basePath } = useRouter()
+  const {
+    about,
+    company_url,
+    content,
+    date,
+    description,
+    logo,
+    meta_description,
+    meta_title,
+    misc,
+    name,
+    slug,
+    title,
+  } = props.blog
+
+  const ogImageUrl = encodeURI(
+    `${process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:54321' : 'https://obuldanrptloktxcffvn.supabase.co'}/functions/v1/og-images?site=customers&customer=${slug}&title=${meta_title ?? title}`
+  )
 
   const meta = {
-    title: `${props.blog.name} | Supabase Customer Stories`,
-    description: props.blog.description,
-    image: props.blog.og_image ?? `${basePath}/images/customers/og/customer-stories.jpg`,
-    url: `https://supabase.io/customers/${props.blog.slug}`,
+    title: meta_title ?? `${name} | Supabase Customer Stories`,
+    description: meta_description ?? description,
+    image: ogImageUrl ?? `${SITE_ORIGIN}/images/customers/og/customer-stories.jpg`,
+    url: `${SITE_ORIGIN}/customers/${slug}`,
   }
 
   return (
@@ -81,11 +102,12 @@ function CaseStudyPage(props: any) {
             //
             // to do: add expiration and modified dates
             // https://github.com/garmeeh/next-seo#article
-            publishedTime: props.blog.date,
+            publishedTime: date,
           },
           images: [
             {
               url: meta.image,
+              alt: `${meta.title} thumbnail`,
             },
           ],
         }}
@@ -93,102 +115,99 @@ function CaseStudyPage(props: any) {
       <DefaultLayout>
         <div
           className="
-            container mx-auto px-8 py-16 sm:px-16
+            container mx-auto p-8 sm:py-16 sm:px-16
             xl:px-20
           "
         >
           <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 mb-2 lg:col-span-2">
+            <div className="hidden xl:block col-span-12 mb-2 xl:col-span-2">
               {/* Back button */}
-              <p>
-                <a
-                  href={'/customers'}
-                  className="text-scale-900 hover:text-scale-1200 flex cursor-pointer items-center text-sm transition"
-                >
-                  <IconChevronLeft style={{ padding: 0 }} />
-                  Back
-                </a>
-              </p>
+              <Link
+                href="/customers"
+                className="text-foreground-lighter hover:text-foreground flex cursor-pointer items-center text-sm transition"
+              >
+                <ChevronLeft style={{ padding: 0 }} />
+                Back
+              </Link>
             </div>
 
-            <div
-              className="col-span-12 lg:col-span-8
-          
-          "
-            >
-              <div className="">
+            <div className="col-span-12 lg:col-span-8">
+              <div>
                 <article className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-8 max-w-xxl">
-                    <Link passHref href="/customers">
-                      <a className="text-brand-900 hover:text-brand-1000 mb-2 mt-0">
-                        Customer Stories
-                      </a>
+                  <div className="flex flex-col gap-4 sm:gap-8 max-w-xxl">
+                    <Link
+                      href="/customers"
+                      className="text-brand hover:text-brand-600 sm:mb-2 mt-0"
+                    >
+                      Customer Stories
                     </Link>
-                    <h1 className="text-scale-1200 text-4xl font-semibold xl:text-5xl">
-                      {props.blog.title}
-                    </h1>
-                    <h2 className="text-scale-1200 text-xl xl:text-2xl">
-                      {props.blog.description}
-                    </h2>
+                    <h1 className="text-foreground text-4xl font-semibold xl:text-5xl">{title}</h1>
+                    <h2 className="text-foreground text-xl xl:text-2xl">{description}</h2>
                   </div>
 
                   <div className="grid grid-cols-12 prose max-w-none gap-8 lg:gap-20">
                     <div className="col-span-12 lg:col-span-4 lg:block xl:col-span-4">
                       <div className="space-y-8 lg:sticky lg:top-24 lg:mb-24">
                         {/* Logo */}
-                        <div className={`relative h-16 w-32`}>
-                          <p className="flex flex-row ">
-                            <Image
-                              layout="fill"
-                              src={`${props.blog.logo}`}
-                              alt={`${props.blog.title} logo`}
-                              objectFit="scale-down"
-                              objectPosition="left"
-                              className="
-                      bg-no-repeat
-                      
-                      dark:brightness-200 
-                      dark:contrast-0
-                      dark:filter
-                    "
-                            />
-                          </p>
+                        <div className="relative h-16 w-32 lg:mt-5">
+                          <Image
+                            fill
+                            src={logo}
+                            alt={`${title} logo`}
+                            priority
+                            placeholder="blur"
+                            blurDataURL="/images/blur.png"
+                            draggable={false}
+                            className="
+                              bg-no-repeat
+                              object-left
+                              object-contain
+                              m-0
+
+                              [[data-theme*=dark]_&]:brightness-200
+                              [[data-theme*=dark]_&]:contrast-0
+                              [[data-theme*=dark]_&]:filter
+                            "
+                          />
                         </div>
 
                         <div className="flex flex-col space-y-2">
-                          <span className="text-scale-900">About</span>
-                          <p>{props.blog.about}</p>
-                          <span className="not-prose ">
-                            <a
-                              href={props.blog.company_url}
-                              className=" flex cursor-pointer items-center space-x-1 opacity-50 transition-opacity hover:opacity-100"
-                              target="_blank"
-                            >
-                              <span>{props.blog.company_url}</span>
-                              <IconExternalLink size={14} />
-                            </a>
-                          </span>
+                          <span className="text-foreground-lighter">About</span>
+                          <p>{about}</p>
+                          {company_url && (
+                            <span className="not-prose ">
+                              <a
+                                href={company_url}
+                                className="flex cursor-pointer items-center space-x-1 transition-opacity text-foreground-lightround-ligtext-foreground-light:text-foreground-light"
+                                target="_blank"
+                              >
+                                <span>{company_url}</span>
+                                <ExternalLink size={14} />
+                              </a>
+                            </span>
+                          )}
                         </div>
 
-                        {props.blog.misc.map((x: any) => {
+                        {misc?.map((x: any) => {
                           return (
                             <div className="flex flex-col gap-0">
-                              <span className="text-scale-900">{x.label}</span>
-                              <span className="text-scale-1100">{x.text}</span>
+                              <span className="text-foreground-lighter">{x.label}</span>
+                              <span className="text-foreground-light">{x.text}</span>
                             </div>
                           )
                         })}
 
-                        <div className="">
+                        <div>
                           <p>Ready to get started?</p>
                           <div>
-                            <Link href="https://supabase.com/contact/enterprise">
-                              <a className="no-underline">
-                                <Button type="default" iconRight={<IconChevronRight />}>
-                                  Contact sales
-                                </Button>
-                              </a>
-                            </Link>
+                            <Button asChild type="default" iconRight={<ChevronRight />}>
+                              <Link
+                                href="https://supabase.com/contact/enterprise"
+                                className="no-underline"
+                              >
+                                Contact sales
+                              </Link>
+                            </Button>
                           </div>
                         </div>
                       </div>

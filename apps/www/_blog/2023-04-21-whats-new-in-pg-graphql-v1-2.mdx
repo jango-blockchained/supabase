@@ -1,13 +1,14 @@
 ---
-title: 'What''s New in pg_graphql v1.2'
+title: "What's New in pg_graphql v1.2"
 description: 'New Features in the v1.2 release of pg_graphql'
-launchweek: 7
+launchweek: '7'
+categories:
+  - postgres
 tags:
   - postgres
   - graphql
   - planetpg
 date: '2023-04-21'
-published_at: '2023-04-21:00:00.000-07:00'
 toc_depth: 3
 author: oli_rice
 image: launch-week-6/pggraphql/og-pg-graphql.png
@@ -37,11 +38,9 @@ create view "ProjectOwner" as
     acc.id,
     acc.name
   from
-    account acc
-    join role r
-      on r.id = acc.role_id
-  where
-    acc.role = 'project_owner'
+    account as acc
+    join role as r on r.id = acc.role_id
+  where acc.role = 'project_owner';
 ```
 
 Since all entities exposed by `pg_graphql` require primary keys, we must define that constraint for the view. We do that using a comment directive:
@@ -65,7 +64,7 @@ With associated `Edge` and `Connection` types. That enables querying via:
 
 ```graphql
 {
-  projectOwnerCollection (first: 2) {
+  projectOwnerCollection(first: 2) {
     edges {
       node {
         nodeId
@@ -131,7 +130,7 @@ Note that `startsWith` filters should be preferred where appropriate because the
 
 ```graphql
 {
-  generalLedgerCollection(filter: {identifierCode: {startsWith: "BX1:"}}) {
+  generalLedgerCollection(filter: { identifierCode: { startsWith: "BX1:" } }) {
     edges {
       node {
         nodeId
@@ -207,3 +206,4 @@ The headline features we aim to launch in coming releases of `pg_graphql` includ
 - [Introducing pg_graphql: A GraphQL extension for PostgreSQL](https://supabase.com/blog/pg-graphql)
 - [GraphQL is now available in Supabase](https://supabase.com/blog/graphql-now-available)
 - [pg_graphql v1.0](https://supabase.com/blog/pg-graphql-v1)
+- [pg_graphql: Postgres functions now supported](https://supabase.com/blog/pg-graphql-postgres-functions)

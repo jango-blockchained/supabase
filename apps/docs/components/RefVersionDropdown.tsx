@@ -1,73 +1,81 @@
-import { Badge, Dropdown, IconChevronDown } from 'ui'
-import { useRouter } from 'next/router'
-import { REFERENCES } from './Navigation/NavigationMenu/NavigationMenu.constants'
+'use client'
 
-const RevVersionDropdown = () => {
-  const { asPath, push } = useRouter()
-  const pathSegments = asPath.split('/')
+import { ChevronDown } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
-  const library = pathSegments.length >= 3 ? pathSegments[2] : undefined
+import {
+  Badge,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from 'ui'
+
+import { REFERENCES } from '~/content/navigation.references'
+
+const RevVersionDropdown = ({
+  library,
+  currentVersion,
+}: {
+  library: string
+  currentVersion: string
+}) => {
+  const { push } = useRouter()
+
   const libraryMeta = REFERENCES?.[library] ?? undefined
   const versions = libraryMeta?.versions ?? []
 
-  const currentVersion = versions.includes(pathSegments[pathSegments.indexOf(library) + 1])
-    ? pathSegments[pathSegments.indexOf(library) + 1]
-    : versions[0]
+  if (!versions || versions.length <= 1) {
+    return null
+  }
 
   const onSelectVersion = (version: string) => {
-    if (!library) return
     if (version === versions[0]) {
-      push(`/reference/${library}/start`)
+      push(`/reference/${library}`)
     } else {
-      push(`/reference/${library}/${version}/start`)
+      push(`/reference/${library}/${version}`)
     }
   }
 
-  if (!versions || versions.length === 0) {
-    return <></>
-  }
-
   return (
-    <Dropdown
-      size="small"
-      align="start"
-      side="bottom"
-      overlay={
-        <>
-          <Dropdown.Label>Stable releases</Dropdown.Label>
-          {versions.map((version, index) => (
-            <Dropdown.Item key={version} onClick={() => onSelectVersion(version)}>
-              <span className={`${currentVersion === version ? 'font-bold' : ''}`}>
-                Version {version}.0
-              </span>
-              <Dropdown.RightSlot>
-                {index === 0 && <Badge size="small">Latest</Badge>}
-              </Dropdown.RightSlot>
-            </Dropdown.Item>
-          ))}
-        </>
-      }
-    >
-      <div
-        className="
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <div
+          className="
           group
           justify-between
-          bg-scaleA-200
+          bg-control
           border
-          hover:border-scale-600
-          hover:bg-scaleA-300
-          border-scale-500 px-2 h-[32px] rounded
+          hover:border-control
+          hover:bg-overlay-hover
+          border-control px-2 h-[32px] rounded
           font-mono
-          flex items-center gap-1 text-scale-900 text-xs group-hover:text-scale-1200 transition
+          flex items-center gap-1 text-foreground-muted text-xs group-hover:text-foreground transition
           "
-      >
-        {/* <span>version</span> */}
-        <span className="text-scale-1200 text-sm group-hover:text-scale-1200 transition">
-          {currentVersion}.0
-        </span>
-        <IconChevronDown size={14} strokeWidth={2} />
-      </div>
-    </Dropdown>
+        >
+          <span className="text-foreground text-sm group-hover:text-foreground transition">
+            {currentVersion}.0
+          </span>
+          <ChevronDown size={14} strokeWidth={2} />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" side="bottom" className="w-48">
+        <DropdownMenuLabel className="text-xs">Stable releases</DropdownMenuLabel>
+        {versions.map((version, index) => (
+          <DropdownMenuItem
+            key={version}
+            onClick={() => onSelectVersion(version)}
+            className="justify-between flex"
+          >
+            <span className={`${currentVersion === version ? 'font-bold' : ''}`}>
+              Version {version}.0
+            </span>
+            {index === 0 && <Badge size="small">Latest</Badge>}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 export default RevVersionDropdown

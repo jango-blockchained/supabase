@@ -1,8 +1,9 @@
-import { TsDoc } from '../../generator/legacy/definitions'
+import type { TsDoc } from '../../generator/legacy/definitions'
 
 import { values, mapValues } from 'lodash'
-import { OpenAPIV3 } from 'openapi-types'
+import type { OpenAPIV3 } from 'openapi-types'
 import { flattenSections } from '../helpers'
+import type { ICommonItem } from '~/components/reference/Reference.types'
 
 export function extractTsDocNode(nodeToFind: string, definition: any) {
   const nodePath = nodeToFind.split('.')
@@ -226,7 +227,11 @@ export type enrichedOperation = OpenAPIV3.OperationObject & {
   tags?: []
 }
 
-export function gen_v3(spec: OpenAPIV3.Document, dest: string, { apiUrl }: { apiUrl: string }) {
+export function gen_v3(
+  spec: OpenAPIV3.Document,
+  dest: string,
+  { apiUrl, type }: { apiUrl: string; type?: 'client-lib' | 'cli' | 'api' | 'mgmt-api' }
+) {
   const specLayout = spec.tags || []
   const operations: enrichedOperation[] = []
 
@@ -235,12 +240,15 @@ export function gen_v3(spec: OpenAPIV3.Document, dest: string, { apiUrl }: { api
 
     toArrayWithKey(val!, 'operation').forEach((o) => {
       const operation = o as v3OperationWithPath
+      const operationId =
+        type === 'mgmt-api' && isValidSlug(operation.operationId)
+          ? operation.operationId
+          : slugify(operation.summary!)
       const enriched = {
         ...operation,
         path: key,
         fullPath,
-        operationId: slugify(operation.summary!),
-
+        operationId,
         responseList: toArrayWithKey(operation.responses!, 'responseCode') || [],
       }
       // @ts-expect-error // missing 'responses', see OpenAPIV3.OperationObject.responses
@@ -278,6 +286,11 @@ const slugify = (text: string) => {
     .replace(/-+$/, '') // Trim - from end of text
 }
 
+function isValidSlug(slug: string): boolean {
+  const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+  return slugRegex.test(slug)
+}
+
 // Uppercase the first letter of a string
 const toTitle = (text: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1)
@@ -294,12 +307,13 @@ export const toArrayWithKey = (obj: object, keyAs: string) =>
     })
   )
 
-export function generateAllowedClientLibKeys(sections, spec) {
+/**
+ * Get a list of common section IDs that are available in this spec
+ */
+export function getAvailableSectionIds(sections: ICommonItem[], spec: any) {
   // Filter parent sections first
 
-  const specIds = spec.functions.map((func) => {
-    return func.id
-  })
+  const specIds = spec.functions.map(({ id }) => id)
 
   const newShape = flattenSections(sections).filter((section) => {
     if (specIds.includes(section.id)) {

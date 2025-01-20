@@ -1,10 +1,11 @@
+import { ChevronRight } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
-import { CodeBlock, IconChevronRight, Tabs } from 'ui'
-// @ts-expect-error
-import spec from '~/../../spec/cli_v1_commands.yaml' assert { type: 'yml' }
+import { CodeBlock } from 'ui'
 import Options from '~/components/Options'
 import Param from '~/components/Params'
+import { TabPanel, Tabs } from '~/features/ui/Tabs'
 import RefSubLayout from '~/layouts/ref/RefSubLayout'
+import spec from '~/spec/cli_v1_commands.yaml' with { type: 'yml' }
 import RefDetailCollapse from './RefDetailCollapse'
 
 export type Flag = {
@@ -80,7 +81,7 @@ const CliCommandSection = (props) => {
                   <ReactMarkdown>{command.description}</ReactMarkdown>
                 </div>
               ) : (
-                <p className="capitalize mb-4 scroll-mt-16 mt-0 text-scale-1100 text-base">
+                <p className="capitalize mb-4 scroll-mt-24 mt-0 text-foreground-light text-base">
                   {command.summary}
                 </p>
               )}
@@ -88,16 +89,16 @@ const CliCommandSection = (props) => {
 
             {command.subcommands?.length > 0 && (
               <div className="mb-3">
-                <h3 className="text-lg text-scale-1200 mb-3">Available Commands</h3>
+                <h3 className="text-lg text-foreground mb-3">Available Commands</h3>
                 <ul>
                   {command.subcommands.map((subcommand) => (
                     <li key={subcommand} className="flex items-center gap-3">
-                      <div className="text-scale-900">
-                        <IconChevronRight size={14} strokeWidth={2} />
+                      <div className="text-foreground-muted">
+                        <ChevronRight size={14} strokeWidth={2} />
                       </div>
                       <a
                         href={`#${subcommand}`}
-                        className="transition text-scale-1100 hover:text-brand-900"
+                        className="transition text-foreground-light hover:text-brand"
                       >
                         $ {subcommand.replace(/-/g, ' ')}
                       </a>
@@ -108,22 +109,20 @@ const CliCommandSection = (props) => {
             )}
             {commandFlags.length > 0 && (
               <>
-                <h3 className="text-lg text-scale-1200 mb-3">Flags</h3>
-                <ul className="">
+                <h3 className="text-lg text-foreground mb-3">Flags</h3>
+                <ul>
                   {commandFlags.map((flag: Flag) => (
-                    <>
-                      <li className="mt-0">
-                        <Param {...flag} isOptional={!flag.required}>
-                          {flag?.accepted_values && (
-                            <Options>
-                              {flag?.accepted_values.map((value) => {
-                                return <Options.Option {...value} />
-                              })}
-                            </Options>
-                          )}
-                        </Param>
-                      </li>
-                    </>
+                    <li key={flag.id} className="mt-0">
+                      <Param {...flag} isOptional={!flag.required}>
+                        {flag?.accepted_values && (
+                          <Options>
+                            {flag?.accepted_values.map((value) => {
+                              return <Options.Option key={value.id} {...value} />
+                            })}
+                          </Options>
+                        )}
+                      </Param>
+                    </li>
                   ))}
                 </ul>
               </>
@@ -139,12 +138,13 @@ const CliCommandSection = (props) => {
               size="tiny"
               type="rounded-pills"
               scrollable
+              queryGroup="example"
             >
               {command.examples ? (
                 command.examples.map((example) => {
                   const exampleId = `${command.id}-${example.id}`
                   return (
-                    <Tabs.Panel
+                    <TabPanel
                       id={exampleId}
                       key={exampleId}
                       label={example.name}
@@ -164,7 +164,7 @@ const CliCommandSection = (props) => {
                         defaultOpen={false}
                       >
                         <CodeBlock
-                          className="useless-code-block-class rounded !rounded-tl-none !rounded-tr-none border border-scale-500"
+                          className="useless-code-block-class rounded !rounded-tl-none !rounded-tr-none border border-DEFAULT"
                           language="bash"
                           hideLineNumbers={true}
                         >
@@ -178,17 +178,17 @@ const CliCommandSection = (props) => {
                           label="Notes"
                           defaultOpen={false}
                         >
-                          <div className="bg-scale-300 border border-scale-500 rounded !rounded-tl-none !rounded-tr-none prose max-w-none px-5 py-2">
+                          <div className="bg-overlay border border-overlay rounded !rounded-tl-none !rounded-tr-none prose max-w-none px-5 py-2">
                             <ReactMarkdown className="text-sm">{example.description}</ReactMarkdown>
                           </div>
                         </RefDetailCollapse>
                       )}
-                    </Tabs.Panel>
+                    </TabPanel>
                   )
                 })
               ) : (
                 // TODO: remove this block once all commands have examples
-                <Tabs.Panel
+                <TabPanel
                   id={`${command.id}-basic-usage`}
                   key={`${command.id}-basic-usage`}
                   label="Basic usage"
@@ -201,7 +201,7 @@ const CliCommandSection = (props) => {
                   >
                     {command.usage}
                   </CodeBlock>
-                </Tabs.Panel>
+                </TabPanel>
               )}
             </Tabs>
           </div>

@@ -1,83 +1,85 @@
 <p align="center">
-<img width="300" src="https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-wordmark--light.svg#gh-light-mode-only">
-<img width="300" src="https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-wordmark--dark.svg#gh-dark-mode-only">
+<img src="https://user-images.githubusercontent.com/8291514/213727234-cda046d6-28c6-491a-b284-b86c5cede25d.png#gh-light-mode-only">
+<img src="https://user-images.githubusercontent.com/8291514/213727225-56186826-bee8-43b5-9b15-86e839d89393.png#gh-dark-mode-only">
 </p>
 
 ---
 
 # Supabase
 
-[Supabase](https://supabase.com) on avoimen lähdekoodin Firebase-vaihtoehto. Rakennamme Firebasen ominaisuuksia yritystason avoimen lähdekoodin työkaluilla.
+[Supabase](https://supabase.com) on avoimen lähdekoodin Firebase-vaihtoehto. Rakennamme Firebasen ominaisuuksia käyttäen yritystason avoimen lähdekoodin työkaluja.
 
-- [x] Isännöity Postgres-tietokanta [Docs](https://supabase.com/docs/guides/database)
-- [x] Autentikointi ja valtuutus [Docs](https://supabase.com/docs/guides/auth)
-- [x] Automaattisesti luodut rajapinnat
-  - [x] REST [Docs](https://supabase.com/docs/guides/database/api#rest-api)
-  - [x] Reaaliaikaiset tilaukset [Docs](https://supabase.com/docs/guides/database/api#realtime-api)
-  - [x] GraphQL (Beta) [Docs](https://supabase.com/docs/guides/database/api#graphql-api)
-- [x] Funktiot
-  - [x] Tietokantatoiminnot [Docs](https://supabase.com/docs/guides/database/functions)
+- [x] Hosted Postgres Database. [Docs](https://supabase.com/docs/guides/database)
+- [x] Tunnistus ja valtuutus. [Docs](https://supabase.com/docs/guides/auth)
+- [x] Automaattisesti luodut API:t.
+  - [x] REST. [Asiakirjat](https://supabase.com/docs/guides/api#rest-api-overview)
+  - [x] GraphQL. [Asiakirjat](https://supabase.com/docs/guides/api#graphql-api-overview)
+  - [x] Reaaliaikaiset tilaukset. [Asiakirjat](https://supabase.com/docs/guides/api#realtime-api-overview)
+- [x] Funktiot.
+  - [x] Tietokantafunktiot. [Docs](https://supabase.com/docs/guides/database/functions)
   - [x] Reunatoiminnot [Docs](https://supabase.com/docs/guides/functions)
-- [x] Tiedostojen säilytys [Docs](https://supabase.com/docs/guides/storage)
-- [x] Dashboard
+- [x] Tiedostojen tallennus. [Docs](https://supabase.com/docs/guides/storage)
+- [x] Kojelauta
 
-![Supabase hallintapaneeli](https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/github/supabase-dashboard.png)
+![Supabase Dashboard](https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/github/supabase-dashboard.png)
 
 ## Dokumentaatio
 
-Katso täydelliset dokumentaatiot osoitteesta [supabase.com/docs](https://supabase.com/docs)
+Täydellinen dokumentaatio löytyy osoitteesta [supabase.com/docs](https://supabase.com/docs)
 
-Katso ohjeet osallistumiseen vierailemalla [Aloitus](../DEVELOPERS.md)
+Jos haluat nähdä, miten osallistuminen tapahtuu, käy osoitteessa [Getting Started](../DEVELOPERS.md)
 
 ## Yhteisö ja tuki
 
-- [Yhteisön keskustelufoorumi](https://github.com/supabase/supabase/discussions): Apua rakentamisessa, keskustelu tietokannan parhaista käytännöistä.
-- [GitHub ongelmat](https://github.com/supabase/supabase/issues): Bugit ja virheet, joita kohtaat Supabasea käytettäessä.
-- [Email Support](https://supabase.com/docs/support#business-support): Tietokantaan tai infrastruktuuriin liittyvät ongelmat.
-- [Discord](https://discord.supabase.com): Jaa sovelluksiasi ja vietä aikaa yhteisön kanssa.
+- [Yhteisön foorumi](https://github.com/supabase/supabase/discussions). Sopii parhaiten: Apua rakentamiseen, keskustelua tietokannan parhaista käytännöistä.
+- [GitHub Issues](https://github.com/supabase/supabase/issues). Sopii parhaiten: Supabasea käytettäessä kohdatut viat ja virheet.
+- [Sähköpostituki](https://supabase.com/docs/support#business-support). Sopii parhaiten: Tietokantaan tai infrastruktuuriin liittyvät ongelmat.
+- [Discord](https://discord.supabase.com). Sopii parhaiten: Sovellusten jakamiseen ja yhteisön kanssa hengailuun.
 
 ## Status
 
-- [x] Alpha: Testaamme Supabasea suljetun asiakasjoukon kanssa
-- [x] Julkinen alfa: Kuka tahansa voi rekisteröityä osoitteessa [app.supabase.com](https://app.supabase.com). Mutta rauhassa, siinä on muutamia mutkia
-- [x] Julkinen beta: Riittävän vakaa useimpiin ei-yrityskäyttötapauksiin
-- [ ] Julkinen: Valmistettu tuotantoon
+- [x] Alpha: Testaamme Supabasea suljetulla asiakasjoukolla
+- [x] Julkinen Alpha: Kuka tahansa voi rekisteröityä osoitteessa [supabase.com/dashboard](https://supabase.com/dashboard). Mutta olkaa varovaisia, sillä on vielä muutamia ongelmia
+- [x] Julkinen beta: Tarpeeksi vakaa useimpiin ei-yrityskäyttötapauksiin
+- [ ] Julkinen: Yleinen saatavuus [[status](https://supabase.com/docs/guides/getting-started/features#feature-status)]
 
-Olemme tällä hetkellä julkisessa betaversiossa. Katso tämän repon "julkaisut", niin saat ilmoituksen tärkeimmistä päivityksistä.
+Olemme tällä hetkellä Public Betassa. Seuraa tämän repon "releases" -osiota saadaksesi ilmoituksen tärkeimmistä päivityksistä.
 
-<kbd><img src="https://raw.githubusercontent.com/supabase/supabase/d5f7f413ab356dc1a92075cb3cee4e40a957d5b1/web/static/watch-repo.gif" alt="Katso tämä repo"/></kbd>
+<kbd><img src="https://raw.githubusercontent.com/supabase/supabase/d5f7f413ab356dc1a92075cb3cee4e40a957d5b1/web/static/watch-repo.gif" alt="Watch this repo"/></kbd>
 
 ---
 
-## Kuinka se toimii
+## Miten se toimii
 
-Supabase on yhdistelmä avoimen lähdekoodin työkaluja. Rakennamme Firebasen ominaisuuksia käyttämällä yritystason avoimen lähdekoodin tuotteita. Jos työkalut ja yhteisöt ovat olemassa, ja niillä on MIT, Apache 2 tai vastaava avoin lisenssi, käytämme ja tuemme kyseistä työkalua. Jos työkalua ei ole olemassa, rakennamme ja avaamme sen itse. Supabase ei ole Firebasen 1-1-kartoitus. Tavoitteemme on tarjota kehittäjille Firebasen kaltainen kehittäjäkokemus käyttämällä avoimen lähdekoodin työkaluja.
+Supabase on yhdistelmä avoimen lähdekoodin työkaluja. Rakennamme Firebasen ominaisuuksia käyttäen yritystason avoimen lähdekoodin tuotteita. Jos työkalut ja yhteisöt ovat olemassa MIT-, Apache 2- tai vastaavalla avoimella lisenssillä, käytämme ja tuemme kyseistä työkalua. Jos työkalua ei ole olemassa, rakennamme sen itse ja käytämme avointa lähdekoodia. Supabase ei ole Firebasen 1:1-kartoitus. Tavoitteenamme on antaa kehittäjille Firebasen kaltainen kehittäjäkokemus käyttämällä avoimen lähdekoodin työkaluja.
 
 **Arkkitehtuuri**
 
-Supabase on [isännöity alusta](https://app.supabase.com). Voit rekisteröityä ja aloittaa Supabasen käytön asentamatta mitään.
-Voit myös [isännöidä itse](https://supabase.com/docs/guides/hosting/overview) ja [kehittää paikallisesti](https://supabase.com/docs/guides/local-development).
+Supabase on [hosted platform](https://supabase.com/dashboard). Voit rekisteröityä ja aloittaa Supabasen käytön asentamatta mitään.
+Voit myös [itse isännöidä](https://supabase.com/docs/guides/hosting/overview) ja [kehittää paikallisesti](https://supabase.com/docs/guides/local-development).
 
-![Arkkitehtuuri](https://user-images.githubusercontent.com/70828596/187547862-ffa9d058-0c3a-4851-a3e7-92ccfca4b596.png)
+![Arkkitehtuuri](https://github.com/supabase/supabase/blob/master/apps/docs/public/img/supabase-architecture.svg)
 
-- [PostgreSQL](https://www.postgresql.org/) on oliorelaatiotietokantajärjestelmä, jota on kehitetty aktiivisesti yli 30 vuoden ajan ja joka on ansainnut sille vahvan maineen luotettavuudestaan, ominaisuuksien kestävyydestään ja suorituskyvystään.
-- [Realtime](https://github.com/supabase/realtime) on Elixir-palvelin, jonka avulla voit kuunnella PostgreSQL-lisäyksiä, päivityksiä ja poistoja websockettien avulla. Reaaliaikaiset kyselyt Postgresin sisäänrakennetuista replikointitoiminnoista tietokannan muutoksille, muuntaa muutokset JSON-muotoon ja lähettää sitten JSONin verkkoliitäntöjen kautta valtuutetuille asiakkaille.
-- [PostgREST](http://postgrest.org/) on verkkopalvelin, joka muuttaa PostgreSQL-tietokantaasi suoraan RESTful API:ksi
-- [Storage](https://github.com/supabase/storage-api) tarjoaa RESTful-käyttöliittymän S3:een tallennettujen tiedostojen hallintaan käyttämällä Postgresia käyttöoikeuksien hallintaan.
-- [postgres-meta](https://github.com/supabase/postgres-meta) on RESTful-sovellusliittymä Postgresin hallintaan. Sen avulla voit noutaa taulukoita, lisätä rooleja ja suorittaa kyselyitä jne.
-- [GoTrue](https://github.com/netlify/gotrue) on SWT-pohjainen sovellusliittymä käyttäjien hallintaan ja SWT-tunnuksien myöntämiseen.
-- [Kong](https://github.com/Kong/kong) on ​​pilvipohjainen API-yhdyskäytävä.
+- [PostgreSQL](https://www.postgresql.org/) on oliorelationaalinen tietokantajärjestelmä, jota on kehitetty aktiivisesti yli 30 vuoden ajan ja joka on saavuttanut vahvan maineen luotettavuutensa, ominaisuuksien kestävyytensä ja suorituskykynsä ansiosta.
+- [Realtime](https://github.com/supabase/realtime) on Elixir-palvelin, jonka avulla voit kuunnella PostgreSQL:n lisäyksiä, päivityksiä ja poistoja websockettien avulla. Realtime kyselee Postgresin sisäänrakennettua replikointitoimintoa tietokannan muutosten varalta, muuntaa muutokset JSONiksi ja lähettää sitten JSONin websockettien kautta valtuutetuille asiakkaille.
+- [PostgREST](http://postgrest.org/) on web-palvelin, joka muuttaa PostgreSQL-tietokannan suoraan RESTful API:ksi
+- [pg_graphql](http://github.com/supabase/pg_graphql/) PostgreSQL-laajennus, joka paljastaa GraphQL API:n
+- [Storage](https://github.com/supabase/storage-api) tarjoaa RESTful-rajapinnan S3:een tallennettujen tiedostojen hallintaan, jossa käytetään Postgresiä oikeuksien hallintaan.
+- [postgres-meta](https://github.com/supabase/postgres-meta) on RESTful API Postgresin hallintaan, jonka avulla voit hakea taulukoita, lisätä rooleja ja suorittaa kyselyitä jne.
+- [GoTrue](https://github.com/netlify/gotrue) on SWT-pohjainen API käyttäjien hallintaan ja SWT-tunnusten antamiseen.
+- [Kong](https://github.com/Kong/kong) on pilvipohjainen API-yhdyskäytävä.
 
 #### Asiakaskirjastot
 
-Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on erillinen toteutus yhdelle ulkoiselle järjestelmälle. Tämä on yksi tavoista tukea olemassa olevia työkaluja.
+Lähestymistapamme asiakaskirjastoihin on modulaarinen. Jokainen osakirjasto on itsenäinen toteutus yhdelle ulkoiselle järjestelmälle. Tämä on yksi tapa, jolla tuemme olemassa olevia työkaluja.
 
 <table style="table-layout:fixed; white-space: nowrap;">
   <tr>
     <th>Kieli</th>
-    <th>Client</th>
-    <th colspan="5">Feature-Clients (yhdistettynä Supabase-asiakkaaseen)</th>
+    <th>Asiakas</th>
+    <th colspan="5">Feature-Clients (niputettu Supabase-asiakasohjelmaan)</th>
   </tr>
+  
   <tr>
     <th></th>
     <th>Supabase</th>
@@ -87,8 +89,8 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <th><a href="https://github.com/supabase/storage-api" target="_blank" rel="noopener noreferrer">Storage</a></th>
     <th>Functions</th>
   </tr>
-  <!-- MALLI UUDELLE RIVILLE -->
-  <!-- ALOITA NYT
+  <!-- TEMPLATE FOR NEW ROW -->
+  <!-- START ROW
   <tr>
     <td>lang</td>
     <td><a href="https://github.com/supabase-community/supabase-lang" target="_blank" rel="noopener noreferrer">supabase-lang</a></td>
@@ -97,8 +99,10 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <td><a href="https://github.com/supabase-community/realtime-lang" target="_blank" rel="noopener noreferrer">realtime-lang</a></td>
     <td><a href="https://github.com/supabase-community/storage-lang" target="_blank" rel="noopener noreferrer">storage-lang</a></td>
   </tr>
-  LOPETA RIVI -->
+  END ROW -->
+  
   <th colspan="7">⚡️ Virallinen ⚡️</th>
+  
   <tr>
     <td>JavaScript (TypeScript)</td>
     <td><a href="https://github.com/supabase/supabase-js" target="_blank" rel="noopener noreferrer">supabase-js</a></td>
@@ -108,7 +112,18 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <td><a href="https://github.com/supabase/storage-js" target="_blank" rel="noopener noreferrer">storage-js</a></td>
     <td><a href="https://github.com/supabase/functions-js" target="_blank" rel="noopener noreferrer">functions-js</a></td>
   </tr>
+    <tr>
+    <td>Flutter</td>
+    <td><a href="https://github.com/supabase/supabase-flutter" target="_blank" rel="noopener noreferrer">supabase-flutter</a></td>
+    <td><a href="https://github.com/supabase/postgrest-dart" target="_blank" rel="noopener noreferrer">postgrest-dart</a></td>
+    <td><a href="https://github.com/supabase/gotrue-dart" target="_blank" rel="noopener noreferrer">gotrue-dart</a></td>
+    <td><a href="https://github.com/supabase/realtime-dart" target="_blank" rel="noopener noreferrer">realtime-dart</a></td>
+    <td><a href="https://github.com/supabase/storage-dart" target="_blank" rel="noopener noreferrer">storage-dart</a></td>
+    <td><a href="https://github.com/supabase/functions-dart" target="_blank" rel="noopener noreferrer">functions-dart</a></td>
+  </tr>
+  
   <th colspan="7">💚 Yhteisö 💚</th>
+  
   <tr>
     <td>C#</td>
     <td><a href="https://github.com/supabase-community/supabase-csharp" target="_blank" rel="noopener noreferrer">supabase-csharp</a></td>
@@ -119,22 +134,13 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <td><a href="https://github.com/supabase-community/functions-csharp" target="_blank" rel="noopener noreferrer">functions-csharp</a></td>
   </tr>
   <tr>
-    <td>Flutter</td>
-    <td><a href="https://github.com/supabase/supabase-flutter" target="_blank" rel="noopener noreferrer">supabase-dart</a></td>
-    <td><a href="https://github.com/supabase/postgrest-dart" target="_blank" rel="noopener noreferrer">postgrest-dart</a></td>
-    <td><a href="https://github.com/supabase/gotrue-dart" target="_blank" rel="noopener noreferrer">gotrue-dart</a></td>
-    <td><a href="https://github.com/supabase/realtime-dart" target="_blank" rel="noopener noreferrer">realtime-dart</a></td>
-    <td><a href="https://github.com/supabase/storage-dart" target="_blank" rel="noopener noreferrer">storage-dart</a></td>
-    <td><a href="https://github.com/supabase-community/functions-dart" target="_blank" rel="noopener noreferrer">functions-dart</a></td>
-  </tr>
-  <tr>
     <td>Go</td>
     <td>-</td>
     <td><a href="https://github.com/supabase-community/postgrest-go" target="_blank" rel="noopener noreferrer">postgrest-go</a></td>
-    <td>-</td>
+    <td><a href="https://github.com/supabase-community/gotrue-go" target="_blank" rel="noopener noreferrer">gotrue-go</a></td>
     <td>-</td>
     <td><a href="https://github.com/supabase-community/storage-go" target="_blank" rel="noopener noreferrer">storage-go</a></td>
-    <td>-</td>
+    <td><a href="https://github.com/supabase-community/functions-go" target="_blank" rel="noopener noreferrer">functions-go</a></td>
   </tr>
   <tr>
     <td>Java</td>
@@ -142,17 +148,17 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <td>-</td>
     <td><a href="https://github.com/supabase-community/gotrue-java" target="_blank" rel="noopener noreferrer">gotrue-java</a></td>
     <td>-</td>
-    <td>-</td>
+    <td><a href="https://github.com/supabase-community/storage-java" target="_blank" rel="noopener noreferrer">storage-java</a></td>
     <td>-</td>
   </tr>
   <tr>
     <td>Kotlin</td>
-    <td>-</td>
-    <td><a href="https://github.com/supabase-community/postgrest-kt" target="_blank" rel="noopener noreferrer">postgrest-kt</a></td>
-    <td><a href="https://github.com/supabase-community/gotrue-kt" target="_blank" rel="noopener noreferrer">gotrue-kt</a></td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td><a href="https://github.com/supabase-community/supabase-kt" target="_blank" rel="noopener noreferrer">supabase-kt</a></td>
+    <td><a href="https://github.com/supabase-community/supabase-kt/tree/master/Postgrest" target="_blank" rel="noopener noreferrer">postgrest-kt</a></td>
+    <td><a href="https://github.com/supabase-community/supabase-kt/tree/master/GoTrue" target="_blank" rel="noopener noreferrer">gotrue-kt</a></td>
+    <td><a href="https://github.com/supabase-community/supabase-kt/tree/master/Realtime" target="_blank" rel="noopener noreferrer">realtime-kt</a></td>
+    <td><a href="https://github.com/supabase-community/supabase-kt/tree/master/Storage" target="_blank" rel="noopener noreferrer">storage-kt</a></td>
+    <td><a href="https://github.com/supabase-community/supabase-kt/tree/master/Functions" target="_blank" rel="noopener noreferrer">functions-kt</a></td>
   </tr>
   <tr>
     <td>Python</td>
@@ -188,55 +194,67 @@ Lähestymistapamme asiakaskirjastoissa on modulaarinen. Jokainen alikirjasto on 
     <td><a href="https://github.com/supabase-community/gotrue-swift" target="_blank" rel="noopener noreferrer">gotrue-swift</a></td>
     <td><a href="https://github.com/supabase-community/realtime-swift" target="_blank" rel="noopener noreferrer">realtime-swift</a></td>
     <td><a href="https://github.com/supabase-community/storage-swift" target="_blank" rel="noopener noreferrer">storage-swift</a></td>
-    <td>-</td>
+    <td><a href="https://github.com/supabase-community/functions-swift" target="_blank" rel="noopener noreferrer">functions-swift</a></td>
   </tr>
+  <tr>
+    <td>Godot Engine (GDScript)</td>
+    <td><a href="https://github.com/supabase-community/godot-engine.supabase" target="_blank" rel="noopener noreferrer">supabase-gdscript</a></td>
+    <td><a href="https://github.com/supabase-community/postgrest-gdscript" target="_blank" rel="noopener noreferrer">postgrest-gdscript</a></td>
+    <td><a href="https://github.com/supabase-community/gotrue-gdscript" target="_blank" rel="noopener noreferrer">gotrue-gdscript</a></td>
+    <td><a href="https://github.com/supabase-community/realtime-gdscript" target="_blank" rel="noopener noreferrer">realtime-gdscript</a></td>
+    <td><a href="https://github.com/supabase-community/storage-gdscript" target="_blank" rel="noopener noreferrer">storage-gdscript</a></td>
+    <td><a href="https://github.com/supabase-community/functions-gdscript" target="_blank" rel="noopener noreferrer">functions-gdscript</a></td>
+  </tr>
+  
 </table>
 
-<!--- Poista tämä luettelo, jos käännät toiselle kielelle, sillä useiden tiedostojen päivitys on vaikeaa-->
-<!--- Säilytä vain linkki käännöstiedostojen luetteloon-->
+<!--- Remove this list if you're translating to another language, it's hard to keep updated across multiple files-->
+<!--- Keep only the link to the list of translation files-->
 
 ## Käännökset
 
-- [Arabic | العربية](/i18n/README.ar.md)
+- [Arabia | العربية](/i18n/README.ar.md)
 - [Albanian / Shqip](/i18n/README.sq.md)
 - [Bangla / বাংলা](/i18n/README.bn.md)
-- [Catalan / Català](/i18n/README.ca.md)
-- [Danish / Dansk](/i18n/README.da.md)
-- [Dutch / Nederlands](/i18n/README.nl.md)
+- [Bulgarian / Български](/i18n/README.bg.md)
+- [Katalaani / Català](/i18n/README.ca.md)
+- [tanska / Dansk](/i18n/README.da.md)
+- [Hollanti / Nederlands](/i18n/README.nl.md)
 - [English](https://github.com/supabase/supabase)
-- [Finnish / Suomi](/i18n/README.fi.md)
-- [French / Français](/i18n/README.fr.md)
-- [German / Deutsch](/i18n/README.de.md)
-- [Greek / Ελληνικά](/i18n/README.gr.md)
-- [Hebrew / עברית](/i18n/README.he.md)
+- [Suomi / Suomalainen](/i18n/README.fi.md)
+- [ranska / Français](/i18n/README.fr.md)
+- [Saksa / Deutsch](/i18n/README.de.md)
+- [Kreikan kieli / Ελληνικά](/i18n/README.gr.md)
+- [heprea / עברית](/i18n/README.he.md)
 - [Hindi / हिंदी](/i18n/README.hi.md)
-- [Hungarian / Magyar](/i18n/README.hu.md)
+- [Unkari / Magyar](/i18n/README.hu.md)
 - [Nepali / नेपाली](/i18n/README.ne.md)
 - [Indonesian / Bahasa Indonesia](/i18n/README.id.md)
 - [Italian / Italiano](/i18n/README.it.md)
-- [Japanese / 日本語](/i18n/README.jp.md)
+- [Japaniksi / 日本語](/i18n/README.jp.md)
 - [Korean / 한국어](/i18n/README.ko.md)
-- [Malay / Bahasa Malaysia](/i18n/README.ms.md)
-- [Norwegian (Bokmål) / Norsk (Bokmål)](/i18n/README.nb-no.md)
-- [Persian / فارسی](/i18n/README.fa.md)
-- [Polish / Polski](/i18n/README.pl.md)
-- [Portuguese / Portuguese](/i18n/README.pt.md)
-- [Portuguese (Brazilian) / Português Brasileiro](/i18n/README.pt-br.md)
+- [Malaiji / Bahasa Malaysia](/i18n/README.ms.md)
+- [Norjan kieli (Bokmål) / Norsk (Bokmål)](/i18n/README.nb-no.md)
+- [Persia / فارسی](/i18n/README.fa.md)
+- [Puola / Polski](/i18n/README.pl.md)
+- [Portugali / Português](/i18n/README.pt.md)
+- [Portugalin kieli (brasilialainen) / Português Brasileiro](/i18n/README.pt-br.md)
 - [Romanian / Română](/i18n/README.ro.md)
-- [Russian / Pусский](/i18n/README.ru.md)
+- [Venäjä / Pусский](/i18n/README.ru.md)
+- [Serbian / Srpski](/i18n/README.sr.md)
 - [Sinhala / සිංහල](/i18n/README.si.md)
 - [Spanish / Español](/i18n/README.es.md)
-- [Simplified Chinese / 简体中文](/i18n/README.zh-cn.md)
-- [Swedish / Svenska](/i18n/README.sv.md)
+- [Yksinkertaistettu kiina / 简体中文](/i18n/README.zh-cn.md)
+- [Ruotsiksi / Svenska](/i18n/README.sv.md)
 - [Thai / ไทย](/i18n/README.th.md)
-- [Traditional Chinese / 繁体中文](/i18n/README.zh-tw.md)
-- [Turkish / Türkçe](/i18n/README.tr.md)
-- [Ukrainian / Українська](/i18n/README.uk.md)
-- [Vietnamese / Tiếng Việt](/i18n/README.vi-vn.md)
-- [List of translations](/i18n/languages.md) <!--- Keep only this -->
+- [Perinteinen kiina / 繁體中文](/i18n/README.zh-tw.md)
+- [Turkin kieli / Türkçe](/i18n/README.tr.md)
+- [Ukrainaksi / Українська](/i18n/README.uk.md)
+- [Vietnamin kieli / Tiếng Việt](/i18n/README.vi-vn.md)
+- [Luettelo käännöksistä](/i18n/languages.md) <!--- Keep only this -->
 
 ---
 
 ## Sponsorit
 
-[![Uudet sponsorit](https://user-images.githubusercontent.com/10214025/90518111-e74bbb00-e198-11ea-8f88-c9e3c1aa4b5b.png)](https://github.com/sponsors/supabase)
+[![Uusi sponsori](https://user-images.githubusercontent.com/10214025/90518111-e74bbb00-e198-11ea-8f88-c9e3c1aa4b5b.png)](https://github.com/sponsors/supabase)
