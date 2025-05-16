@@ -31,5 +31,16 @@ export default defineConfig({
       resolve(dirname, './tests/setup/polyfills.js'),
       resolve(dirname, './tests/setup/radix.js'),
     ],
+    reporters: [['default']],
+    coverage: {
+      reporter: ['lcov'],
+      exclude: [
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        // 👇 Excluded because it will be deprecated.
+        'lib/common/fetch/**',
+      ],
+      include: ['lib/**/*.ts'],
+    },
   },
 })
