@@ -1728,7 +1728,7 @@ export interface components {
        * @description Postgres engine version. If not provided, the latest version will be used.
        * @enum {string}
        */
-      postgres_engine?: '15' | '17-oriole'
+      postgres_engine?: '15' | '17' | '17-oriole'
       region?: string
       /**
        * @description Release channel. If not provided, GA will be used.
@@ -2216,7 +2216,7 @@ export interface components {
       target_upgrade_versions: {
         app_version: string
         /** @enum {string} */
-        postgres_version: '15' | '17-oriole'
+        postgres_version: '15' | '17' | '17-oriole'
         /** @enum {string} */
         release_channel: 'internal' | 'alpha' | 'beta' | 'ga' | 'withdrawn' | 'preview'
       }[]
@@ -2791,6 +2791,7 @@ export interface components {
       db_pass: string
       /** @enum {string} */
       desired_instance_size?:
+        | 'pico'
         | 'micro'
         | 'small'
         | 'medium'
@@ -4159,13 +4160,12 @@ export interface operations {
       }
     }
     responses: {
-      /** @description [Alpha] Create a new signing key for the project in standby status */
       201: {
         headers: {
           [name: string]: unknown
         }
         content: {
-          'application/json': components['schemas']['CreateSigningKeyBody']
+          'application/json': components['schemas']['SigningKeyResponse']
         }
       }
       403: {
