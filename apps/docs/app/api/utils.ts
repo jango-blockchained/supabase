@@ -1,5 +1,6 @@
 import { type PostgrestError } from '@supabase/supabase-js'
 import { type ZodError } from 'zod'
+import { isObject } from '~/features/helpers.misc'
 
 type ObjectOrNever = object | never
 
@@ -18,6 +19,10 @@ export class ApiError<Details extends ObjectOrNever = never> extends Error {
     return true
   }
 
+  isUserError() {
+    return false
+  }
+
   statusCode() {
     return 500
   }
@@ -32,8 +37,50 @@ export class InvalidRequestError<Details extends ObjectOrNever = never> extends 
     return false
   }
 
+  isUserError() {
+    return true
+  }
+
   statusCode() {
     return 400
+  }
+}
+
+export class NoDataError<Details extends ObjectOrNever = never> extends ApiError<Details> {
+  constructor(message: string, source?: unknown, details?: Details) {
+    super(`Data not found: ${message}`, source, details)
+  }
+
+  isPrivate() {
+    return false
+  }
+
+  isUserError() {
+    return true
+  }
+
+  statusCode() {
+    return 404
+  }
+}
+
+export class MultiError<ErrorType = unknown, Details extends ObjectOrNever = never> extends Error {
+  constructor(
+    message: string,
+    cause?: Array<ErrorType>,
+    public details?: Details
+  ) {
+    super(message, { cause })
+  }
+
+  get totalErrors(): number {
+    return (this.cause as Array<ErrorType>)?.length || 0
+  }
+
+  appendError(message: string, error: ErrorType): this {
+    this.message = `${this.message}\n\t${message}`
+    ;((this.cause ?? (this.cause = [])) as Array<ErrorType>).push(error)
+    return this
   }
 }
 
@@ -55,4 +102,11 @@ export function convertZodToInvalidRequestError(
   const message = `${prelude ? `${prelude}: ` : ''}${issue.message} at key "${pathStr}"`
 
   return new InvalidRequestError(message, error)
+}
+
+export function extractMessageFromAnyError(error: unknown): string {
+  if (isObject(error) && 'message' in error && typeof error.message === 'string') {
+    return error.message
+  }
+  return String(error)
 }
