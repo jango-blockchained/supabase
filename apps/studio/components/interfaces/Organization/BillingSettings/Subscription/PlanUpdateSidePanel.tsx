@@ -17,7 +17,6 @@ import type { OrgPlan } from 'data/subscriptions/types'
 import { useSendEventMutation } from 'data/telemetry/send-event-mutation'
 import { useCheckPermissions } from 'hooks/misc/useCheckPermissions'
 import { useSelectedOrganization } from 'hooks/misc/useSelectedOrganization'
-import { useFlag } from 'hooks/ui/useFlag'
 import { formatCurrency } from 'lib/helpers'
 import { pickFeatures, pickFooter, plans as subscriptionsPlans } from 'shared-data/plans'
 import { useOrgSettingsPageStateSnapshot } from 'state/organization-settings'
@@ -28,6 +27,7 @@ import ExitSurveyModal from './ExitSurveyModal'
 import MembersExceedLimitModal from './MembersExceedLimitModal'
 import { SubscriptionPlanUpdateDialog } from './SubscriptionPlanUpdateDialog'
 import UpgradeSurveyModal from './UpgradeModal'
+import PartnerManagedResource from 'components/ui/PartnerManagedResource'
 
 const PlanUpdateSidePanel = () => {
   const router = useRouter()
@@ -36,7 +36,6 @@ const PlanUpdateSidePanel = () => {
   const { mutate: sendEvent } = useSendEventMutation()
 
   const originalPlanRef = useRef<string>()
-  const allowOrioleDB = useFlag('allowOrioleDb')
 
   const [showExitSurvey, setShowExitSurvey] = useState(false)
   const [showUpgradeSurvey, setShowUpgradeSurvey] = useState(false)
@@ -52,8 +51,8 @@ const PlanUpdateSidePanel = () => {
     (it) => it.organization_id === selectedOrganization?.id
   )
 
-  const { data } = useOrganizationQuery({ slug }, { enabled: allowOrioleDB })
-  const hasOrioleProjects = allowOrioleDB ? false : !!data?.has_oriole_project
+  const { data } = useOrganizationQuery({ slug })
+  const hasOrioleProjects = !!data?.has_oriole_project
 
   const snap = useOrgSettingsPageStateSnapshot()
   const visible = snap.panelKey === 'subscriptionPlan'
@@ -145,6 +144,18 @@ const PlanUpdateSidePanel = () => {
           </div>
         }
       >
+        {selectedOrganization?.managed_by === 'vercel-marketplace' && (
+          <PartnerManagedResource
+            partner={selectedOrganization?.managed_by}
+            resource="Organization plans"
+            cta={{
+              installationId: selectedOrganization?.partner_id,
+              path: '/settings',
+              message: 'Change Plan on Vercel Marketplace',
+            }}
+            // TODO: support AWS marketplace here: `https://us-east-1.console.aws.amazon.com/billing/home#/bills`
+          />
+        )}
         <SidePanel.Content>
           <div className="py-6 grid grid-cols-12 gap-3">
             {subscriptionsPlans.map((plan) => {
@@ -210,6 +221,9 @@ const PlanUpdateSidePanel = () => {
                         type={isDowngradeOption ? 'default' : 'primary'}
                         disabled={
                           subscription?.plan?.id === 'enterprise' ||
+                          // Downgrades to free are still allowed through the dashboard given we have much better control about showing customers the impact + any possible issues with downgrading to free
+                          (selectedOrganization?.managed_by !== 'supabase' &&
+                            plan.id !== 'tier_free') ||
                           hasOrioleProjects ||
                           !canUpdateSubscription
                         }
